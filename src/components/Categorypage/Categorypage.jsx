@@ -1,0 +1,28 @@
+import React from 'react'
+import Banner from '../Banner/Banner'
+import Productlist from '../Productlist/Productlist'
+import products from '../Productlist/Productlist'
+import Cards from '../Cards/Cards'
+
+const Categorypage = ({title, bgImages, categories=[]}) => {
+
+  let filteredItems = categories.includes('All') ? Productlist : Productlist.filter(item => categories.includes(item.Category))
+ const renderProduct = filteredItems.map(product =>{
+    return(
+        <Cards image={product.image} name={product.name} price={product.price}/>
+    )
+ })
+    
+  return (
+    <div>
+      <Banner title={title} bgImages={bgImages}/>
+
+
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-9 py-20 max-w-[1400px] mx-auto px-10'>
+        {renderProduct}
+      </div>
+    </div>
+  )
+}
+
+export default Categorypage
